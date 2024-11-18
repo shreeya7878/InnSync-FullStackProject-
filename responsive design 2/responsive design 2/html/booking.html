@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Form</title>
+    <link rel="stylesheet" href="../css/booking.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+</head>
+<body>
+    <div class="first">
+        
+        <div class="booking">
+            <div class="image1"></div>
+            <h1>Complete the booking for Guest</h1>
+            <p>Please complete the form below</p>
+            <br>
+            <br>
+        </div>
+        
+        <div class="form">
+            <form action="">
+            <label for="First Name" class="content">First Name</label><br>
+            <input type="text" class="input" required >
+            <label for="Last Name" class="content">Last Name</label><br>
+            <input type="text" class="input" required >
+            
+            <h2>Address</h2>
+            <label for="Street Address" class="content">Street Address</label><br>
+            <input type="text" class="input" required >
+            <label for="Strest Address Line 2" class="content">Street Address Line 2</label><br>
+            <input type="text" class="input" required >
+            <label for="city" class="content">City</label><br>
+            <input type="text" class="input" required >
+            <label for="State/Province" class="content">State/Province</label><br>
+            <input type="text" class="input" required >
+            <label for="Postal / Zip Code">Postal / Zip Code</label>
+            <input type="number" class="input" required ><br>
+            
+            <br>
+            <label for="Phone Number" class="content"><h2>Phone Number</h2></label>
+            <input type="number" class="input" required >
+            <label for="Email" class="content"><h2>Email</h2></label>
+            <input type="text" class="input" required >
+            <label for="example" class="content">example@example.com</label>
+            <br>
+            <label for="Arrival" class="content"><h2>Arrival - Date and Time</h2></label>
+            <label for="Date" class="content">Date</label><br>
+            <input type="date" class="input" required >
+            <label for="hour" class="content">Hour Minutes</label><br>
+            <input type="time" class="input" required >
+            
+            <label for="Departure" class="content"><h2>Departure - Date and Time</h2></label>
+            <label for="Date" class="content">Date</label><br>
+            <input type="date" class="input" required >
+            <label for="hour" class="content">Hour Minutes</label> <br>
+            <input type="time" class="input" required >
+            
+            <label for="Number of Adults" class="content"><h2>Number of Adults</h2></label>
+            <input type="number" class="input" required >  
+            <label for="NUmber of Kinds" class="content"><h2>Number of Kids(If there are any)</h2></label>
+            <input type="number" class="input" required><br><hr>
+            <h2>Payment Method</h2>
+                <input type="radio" name="payment_method" id="cheque" value="Cheque" required>
+                <label for="cheque">Cheque</label>
+                <input type="radio" name="payment_method" id="online" value="Online" required>
+                <label for="online">Online</label>
+            <label for="request"><h2>Do you have any special request</h2></label><br><br>
+            <input type="text" class="request">
+            <hr>
+            <br>
+            <input type="submit" value="Submit">
+
+        </form>
+            
+        </div>
+    
+    </div>
+    <script src="../js/booking.js"></script>
+</body>
+</html>

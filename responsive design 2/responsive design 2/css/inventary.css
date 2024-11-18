@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(../assent/smart-warehouseinventory-management-system-conceptmanager-260nw-2264767949.webp);
+    background-size: cover;
+    opacity: 100;
+    
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #765440;
+}
+
+.inventory, .add-item {
+    background: #ffffff4f;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position:relative;
+    
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #007bff;
+    color: white;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background: #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #218838;
+}
+
+input[type="text"], input[type="number"] {
+    width: calc(33% - 20px);
+    padding: 10px;
+    margin: 10px 5px 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    input[type="text"], input[type="number"] {
+        width: calc(50% - 20px);
+        margin: 10px 10px 10px 0;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    input[type="text"], input[type="number"] {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    th, td {
+        display: block;
+        text-align: right;
+    }
+
+    th {
+        position: absolute;
+        left: -9999px;
+    }
+
+    td {
+        border: none;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 10px;
+        text-align: left;
+        font-weight: bold;
+    }
+}

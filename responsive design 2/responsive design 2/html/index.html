@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <title>HOTEL MANAGEMENT System</title>
+    <link rel="stylesheet" href="../css/style.css">
+    
+</head>
+<body>
+    <div class="topnav" id="shags">
+        <a class="active" href="#home">Home</a>
+        <a href="#roomtype ">Room Types</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact Us</a>
+        <a href="login.html">Login</a>
+      </div>
+    <section class="hero-section" id="home">
+        <div class="final">
+            <div class="hero-text">   
+                <h1 class="hotel">La Belle Évasion</h1>
+                <p style=" margin: 10px 0px; " class="hero-para">we provide room at a very good price along with great amenities to make your living experience  awesome</p>
+                 <button class="book-button" id="book"><a href="booking_request.html" class="anker">BOOK</a></button>
+            </div>
+        </div>
+    </section>
+    <h1 class="room-heading">Room Types</h1>
+    <section class="room-type-container" id="roomtype">
+        
+       
+        <div class="room-images">
+            <img class="room-images img" src="../assent/room.jpg" alt="room-image">
+        </div>
+        <div class="room-list">
+            <h4><U>Single Occupancy Room</U></h4>
+            <p>A room asign to one person.May have one or more beds.
+                The room size or area of a Single Rooms are generally between 37 m<sup>3</sup> to 45 m<sup>3</sup>
+            </p>
+            <h4><U>Family Room</U></h4>
+            <p>A parlour or living room connected with to one or more bedrooms.(A room with oneor more beadrooms and a 
+                seperated living
+                spaces.) </p>
+            <h4><U> Duplex Room</U></h4>
+            <p>The most expensive room provide by a hostle.Usually, only one Suplex suite is avaible in one single hotel
+                property.Similer to the normal suites, a Duplex suite a always has one or more bedrooms and a living space with a
+                strong emphasis on grand in-room decoraction, high-quality amenities and supplies, and tailor-made services(e.g.
+                personal butler during the stay).</p>
+        </div>
+    </section>
+    <h1 class="headinga">ABOUT US</h1>
+
+    <section class="about-section" id="about">
+        <div class="about-us">
+           <p>Looking for a vacation to leave behind the hustle of everyday life and indulge in world-class hospitality at
+             exotic
+            locations? Look no further than the leading & fastest growing hotel chain of Eastern India, Hotel Paradise. Your unwinding days with us will be the perfect blend of leisure, comfort, convenience & class.
+           </p>
+           <br>
+           <p>We are currently present at Puri, Mandarmoni, Kolaghat, Tarapith, Darjeeling, Taki & Sundarban to make your well deserved vacation a truly unforgettable affair.</p>
+           
+    </div>
+        <div class="amenities">
+            <h3>Amenities we have:</h3>
+            
+           <ul>         
+            <li><i class="fa-solid fa-wifi"></i>High Speed Internet</li>
+            <li><i class="fa-solid fa-utensils"></i>Complementry Breakfast</li>
+            <li><i class="fa-solid fa-person-swimming"></i>Swimming Pool</li>
+            <li><i class="fa-solid fa-dumbbell"></i>GYM</li>
+            <li><i class="fa-solid fa-mug-saucer"></i>Cafeteria</li>
+           </ul>
+        </div>
+    </section>
+    
+    <div class="help-button">
+        <a class="jj" href="">
+        <h4>Need Help?</h4>
+        </a>
+    </div>
+    <div class="flask" id="contact">
+        <div class="contact_form_container">
+            <h1 >Contact <span style="color: red;">form</span> </h1>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="82e6bd9f-e10d-433d-9f58-de49d8f873b3">
+            
+                <label for="Name" name="Name" class="cont-label">Name :</label>
+                <input type="text" name="Name" class="contact-input" required>
+                <label for="Email_id" class="cont-label">Email_id :</label>
+                <input type="email" name="Email" required class="contact-input"><br><br>
+                
+                <label for="Mobile Number" class="cont-label">Mobile Number :</label><br>
+                <input type="number" name="Mobile_no." id="Mobile_number" class="contact-input"><br><br>
+                <label for="Message" class="cont-label">Message :</label><br>
+                <input type="text" name="Message"  id="Message" class="contact-input" required><br><br> 
+                <input type="submit" value="SEND MESSAGE"  class="contact-button">
+                
+            </form>
+                
+        </div>
+        <div class="About_us_container">
+            <h3>Address</h3><br>
+            <i class="fa-solid fa-house"></i> Mathura <br>
+            <i class="fa-regular fa-envelope"></i> emergencyservices@gmail.com <br>
+            <i class="fa-solid fa-phone"></i> 654545655 <br><br><br>
+
+            <h3> Business Hours</h3><br>
+            Monday-Saturday:24/7 Available <br>
+            Sunday: 4 AM to 11 PM <br><br><br>
+
+           
+            
+        </div>
+    </div>
+    <script src="../js/style.js"></script>
+</body>
+</html>
