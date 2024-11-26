@@ -10,7 +10,7 @@ function SearchPage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/bookings/search?query=${query}` // Correct the URL to use the search endpoint
+        `http://localhost:3000/bookings/search?query=${query}` // Search endpoint
       );
       const data = await response.json();
       setResults(data);
@@ -18,6 +18,30 @@ function SearchPage() {
       console.error("Error fetching data:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleCheckOut = async (bookingId) => {
+    if (!window.confirm("Are you sure you want to check out this guest?")) return;
+
+    try {
+      const response = await fetch(`http://localhost:3000/bookings/${bookingId}`, {
+        method: "DELETE", // DELETE endpoint
+      });
+
+      if (response.ok) {
+        // Remove the deleted booking from the results
+        setResults((prevResults) =>
+          prevResults.filter((booking) => booking._id !== bookingId)
+        );
+        alert("Guest checked out successfully.");
+      } else {
+        console.error("Failed to check out guest.");
+        alert("Error: Could not check out the guest.");
+      }
+    } catch (error) {
+      console.error("Error checking out guest:", error);
+      alert("Error: Could not check out the guest.");
     }
   };
 
@@ -48,9 +72,21 @@ function SearchPage() {
                 </h3>
                 <p><strong>Phone:</strong> {booking.phone}</p>
                 <p><strong>Email:</strong> {booking.email}</p>
-                <p><strong>Arrival Date:</strong> {new Date(booking.arrivalDate).toLocaleDateString()}</p>
-                <p><strong>Departure Date:</strong> {new Date(booking.departureDate).toLocaleDateString()}</p>
+                <p>
+                  <strong>Arrival Date:</strong>{" "}
+                  {new Date(booking.arrivalDate).toLocaleDateString()}
+                </p>
+                <p>
+                  <strong>Departure Date:</strong>{" "}
+                  {new Date(booking.departureDate).toLocaleDateString()}
+                </p>
                 {/* Add other fields as needed */}
+                <button
+                  onClick={() => handleCheckOut(booking._id)}
+                  style={styles.checkOutButton}
+                >
+                  Check Out
+                </button>
               </div>
             ))
           ) : (
@@ -135,6 +171,18 @@ const styles = {
     fontWeight: "600",
     color: "#0056b3",
     marginBottom: "12px",
+  },
+  checkOutButton: {
+    marginTop: "10px",
+    padding: "10px 16px",
+    backgroundColor: "#e74c3c",
+    color: "#fff",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontSize: "1rem",
+    fontWeight: "500",
+    transition: "background-color 0.3s ease",
   },
   noResults: {
     fontSize: "1.2rem",

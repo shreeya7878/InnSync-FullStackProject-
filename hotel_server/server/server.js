@@ -9,14 +9,18 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
+// MongoDB Connection
 const MONGO_URI = "mongodb://127.0.0.1:27017/hotel_data";
 mongoose
   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB successfully!"))
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
-// Booking schema and model
+/**
+ * Schema and Models
+ */
+
+// Booking Requests Schema and Model
 const bookingSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
@@ -39,44 +43,101 @@ const bookingSchema = new mongoose.Schema({
   specialRequest: { type: String },
 });
 
-const Booking = mongoose.model("Booking", bookingSchema);
+const BookingRequest = mongoose.model("requests", bookingSchema); // Pending requests
+const ApprovedBooking = mongoose.model("bookings", bookingSchema); // Confirmed bookings
 
-// Endpoint to save booking data
-app.post("/bookings", async (req, res) => {
+// Inventory Schema and Model
+const inventorySchema = new mongoose.Schema({
+  itemName: { type: String, required: true },
+  quantity: { type: Number, required: true },
+  whereNeeded: { type: String, required: true },
+});
+
+const Inventory = mongoose.model("Inventory", inventorySchema);
+
+/**
+ * API Routes
+ */
+
+// Bookings Routes
+
+// Save a booking request
+app.post("/requests", async (req, res) => {
   try {
-      console.log("Received booking data:", req.body); // Log the incoming data
-      
-      const newBooking = new Booking(req.body);
-      console.log("Created new booking instance:", newBooking); // Log the new instance before saving
-      
-      await newBooking.save(); // Attempt to save the booking
-      
-      console.log("Booking saved to database successfully"); // Log successful save
-      res.status(200).json({ message: "Booking saved successfully" });
+    const booking = new BookingRequest(req.body);
+    await booking.save();
+    res.status(201).send({ message: "Booking request saved successfully", booking });
   } catch (error) {
-      console.error("Error saving booking:", error); // Log any errors
-      res.status(500).json({ error: "Failed to save booking" });
+    console.error("Error saving booking request:", error);
+    res.status(500).send({ message: "Error saving booking request" });
   }
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+// Save a booking directly to the bookings collection
+app.post("/bookings", async (req, res) => {
+  try {
+    const booking = new ApprovedBooking(req.body);
+    await booking.save();
+    res.status(201).send({ message: "Booking saved directly to bookings", booking });
+  } catch (error) {
+    console.error("Error saving booking:", error);
+    res.status(500).send({ message: "Error saving booking" });
+  }
 });
 
-// Add the following route to search by name (firstName or lastName)
+// Fetch all pending requests
+app.get("/requests", async (req, res) => {
+  try {
+    const requests = await BookingRequest.find();
+    res.status(200).send(requests);
+  } catch (error) {
+    console.error("Error fetching requests:", error);
+    res.status(500).send({ message: "Error fetching requests" });
+  }
+});
+
+// Approve a booking request
+app.post("/approve/:id", async (req, res) => {
+  try {
+    const bookingRequest = await BookingRequest.findById(req.params.id);
+    if (!bookingRequest) {
+      return res.status(404).send({ message: "Request not found" });
+    }
+
+    const approvedBooking = new ApprovedBooking(bookingRequest.toObject());
+    await approvedBooking.save();
+    await BookingRequest.findByIdAndDelete(req.params.id);
+
+    res.status(200).send({ message: "Booking approved and moved to bookings" });
+  } catch (error) {
+    console.error("Error approving booking:", error);
+    res.status(500).send({ message: "Error approving booking" });
+  }
+});
+
+// Delete a booking request
+app.delete("/requests/:id", async (req, res) => {
+  try {
+    await BookingRequest.findByIdAndDelete(req.params.id);
+    res.status(200).send({ message: "Request deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting request:", error);
+    res.status(500).send({ message: "Error deleting request" });
+  }
+});
+
+// Search for bookings (by firstName or lastName)
 app.get("/bookings/search", async (req, res) => {
   try {
-    const { query } = req.query; // This will be the search term from the query string
+    const { query } = req.query;
     if (!query) {
       return res.status(400).json({ error: "Query parameter is required" });
     }
 
-    // Search for bookings that match the query in either firstName or lastName
-    const bookings = await Booking.find({
+    const bookings = await ApprovedBooking.find({
       $or: [
-        { firstName: { $regex: query, $options: "i" } }, // Case-insensitive search for first name
-        { lastName: { $regex: query, $options: "i" } },  // Case-insensitive search for last name
+        { firstName: { $regex: query, $options: "i" } },
+        { lastName: { $regex: query, $options: "i" } },
       ],
     });
 
@@ -85,4 +146,53 @@ app.get("/bookings/search", async (req, res) => {
     console.error("Error searching bookings:", error);
     res.status(500).json({ error: "Failed to search bookings" });
   }
+});
+
+// Inventory Routes
+
+// Save inventory data
+app.post("/inventory", async (req, res) => {
+  try {
+    const newItem = new Inventory(req.body);
+    await newItem.save();
+    res.status(200).json({ message: "Inventory item saved successfully" });
+  } catch (error) {
+    console.error("Error saving inventory item:", error);
+    res.status(500).json({ error: "Failed to save inventory item" });
+  }
+});
+
+// Fetch all inventory items
+app.get("/inventory", async (req, res) => {
+  try {
+    const inventory = await Inventory.find();
+    res.status(200).json(inventory);
+  } catch (error) {
+    console.error("Error fetching inventory:", error);
+    res.status(500).json({ error: "Failed to fetch inventory data" });
+  }
+});
+// Delete a booking by ID
+app.delete("/bookings/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedBooking = await ApprovedBooking.findByIdAndDelete(id);
+
+    if (!deletedBooking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    res.status(200).json({ message: "Booking successfully deleted" });
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+    res.status(500).json({ message: "Error deleting booking" });
+  }
+});
+
+
+/**
+ * Start the Server
+ */
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
