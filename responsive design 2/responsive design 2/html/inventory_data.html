@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background-color: #fff;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Inventory Data</h1>
+  <table id="inventory-table">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Where Needed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data will be populated here dynamically -->
+    </tbody>
+  </table>
+  <div class="error" id="error-message"></div>
+
+  <script>
+    async function fetchInventoryData() {
+      try {
+        // Fetch data from the server
+        const response = await fetch("http://localhost:3000/inventory");
+
+        // Check for response status
+        if (!response.ok) {
+          throw new Error(`Error fetching inventory data: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Get the table body
+        const tableBody = document.querySelector("#inventory-table tbody");
+
+        // Clear existing rows (if any)
+        tableBody.innerHTML = "";
+
+        // Populate the table with inventory data
+        data.forEach((item) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${item.itemName}</td>
+            <td>${item.quantity}</td>
+            <td>${item.whereNeeded}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error(error);
+        document.getElementById("error-message").textContent = error.message;
+      }
+    }
+
+    // Call the function to fetch data when the page loads
+    fetchInventoryData();
+  </script>
+</body>
+</html>

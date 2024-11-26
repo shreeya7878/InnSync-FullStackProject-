@@ -1,6 +1,6 @@
 // Predefined usernames, passwords, and roles.
 const users = {
-    "Piyush": { password: "Gupta", role: "Bade Saahab" },
+    "Piyush": { password: "Gupta", role: "  Administrator" },
     "Chandan": { password: "Srivastava", role: "Front Desk Supervisor" },
     "Anvesha": { password: "Singh", role: "General Manager" },
     "Sneha": { password: "Saraf", role: "Revenue Manager" },

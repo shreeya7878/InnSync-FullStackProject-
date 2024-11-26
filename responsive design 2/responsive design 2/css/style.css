@@ -111,24 +111,84 @@ h1, h3, h4 {
 
 .about-section {
     display: flex;
-    justify-content: space-between;
-    margin: 20px;
+    flex-direction: row; /* Default to row for wider screens */
+    justify-content: space-between; /* Space out the two sections */
+    align-items: flex-start; /* Align items to the top */
+    margin: 20px 10px;
     padding: 20px;
+    background-color: #ffffff; /* Light background for contrast */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    gap: 20px; /* Add space between about-us and amenities */
 }
 
 .about-us {
-    flex: 2;
+    flex: 2; /* Larger space for the text content */
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: justify; /* Improve text readability */
+    color: #2c3e50;
 }
 
 .amenities {
-    flex: 1;
+    flex: 1; /* Smaller space for the amenities list */
     padding-left: 20px;
+    font-size: 1rem;
+}
+
+.amenities h3 {
+    color: #e74c3c; /* Highlight the title */
+    font-size: 1.3rem;
+    margin-bottom: 10px;
 }
 
 .amenities ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
+
+.amenities li {
+    margin-bottom: 10px;
+    color: #34495e; /* Darker shade for list items */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+}
+
+.amenities li i {
+    color: #3498db; /* Icon color */
+    font-size: 1.2rem;
+}
+
+/* Add responsiveness for smaller screens */
+@media (max-width: 768px) {
+    .about-section {
+        flex-direction: column; /* Stack the sections vertically */
+        padding: 15px;
+    }
+
+    .about-us {
+        margin-bottom: 20px; /* Add space below the text section */
+    }
+
+    .amenities {
+        padding-left: 0;
+    }
+}
+
+/* Add specific styles for landscape orientation */
+@media (orientation: landscape) {
+    .about-section {
+        flex-direction: row; /* Keep sections side-by-side */
+        gap: 30px;
+    }
+
+    .about-us {
+        font-size: 1.2rem; /* Slightly larger font for readability */
+    }
+}
+
 
 .help-button {
     background-color: #e67e22;
@@ -256,4 +316,52 @@ h1, h3, h4 {
     .topnav a {
         font-size: 7px;
     }
+}
+.footer {
+    background-color: #2c2c54; 
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 20px;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-socials h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #d3d3d3; 
+}
+
+.footer-socials a {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    filter: invert(100%); 
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-icon:hover {
+    transform: scale(1.2); 
+}
+
+.footer-info p {
+    font-family: 'Montserrat', sans-serif;
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.footer-info p:last-child {
+    font-size: 0.9rem;
+    color: #a0a0a0;
 }

@@ -1,156 +1,172 @@
+/* Resetting margin and padding for all elements */
 body, h1, h2, p {
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Ensures consistent sizing across elements */
 }
 
 body {
-    background-color: #FFE6D1; /* Updated background color */
+    background-color: rgba(142, 208, 35, 0.34); /* Subtle teal background */
     font-family: Arial, sans-serif;
-    color: #333;
+    color: #333; /* Neutral text color */
+    line-height: 1.6; /* Improved readability */
 }
 
+/* Main container for the form */
 .first {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Increased shadow depth */
-    border-radius: 10px; /* Slightly rounded corners */
+    background-color: #ffffff; /* Clean white container */
+    
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border-radius: 8px; /* Smooth rounded corners */
 }
 
-.image1 {
-    background-image: url(../assent/lake-7316684_1280.jpg); /* Updated image path */
-    text-align: center;
-    margin-bottom: 20px;
-    height: 300px;
-    position: relative;
-    background-size: cover;
-    background-position: center; /* Better centering for background image */
-    filter: brightness(0.8); /* Adjusted brightness */
+.first > .booking {
+    background-image: url(../assent/lake-7316684_1280.jpg);
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents image repetition */
 }
 
+/* Booking header section */
 .booking h1 {
     text-align: center;
-    font-size: 2.5em;
-    color: whitesmoke;
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Chalkduster';
+    font-size: 2.5em; /* Large heading for emphasis */
+    color: white; /* Vibrant purple */
+    font-family: 'Chalkduster', cursive;
+    margin-bottom: 10px;
 }
-
 
 .booking p {
     text-align: center;
-    font-size: 20px;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #6c757d; /* Subtle gray tone */
-    z-index: 1;
-    margin-top: 170px;
-    font-family: 'Monospace';
+    font-size: 1.25em; /* Readable font size */
+    color: white; /* Subtle gray */
+    font-family: 'Courier New', monospace;
+    margin-bottom: 20px;
 }
 
+/* Form container styles */
 .form {
     display: flex;
     flex-direction: column;
 }
 
+/* Headings inside the form */
 h2 {
     margin-top: 15px;
-    margin-bottom: 5px;
-    font-size: 1.5em;
-    color: #003366; /* Updated section heading color */
+    margin-bottom: 10px;
+    font-size: 1.5em; /* Section headings */
+    color: #333; /* Neutral text color */
 }
 
-.input, .request {
-    padding: 12px; /* Slightly larger padding */
-    margin-bottom: 15px;
-    border: 1px solid #bbb; /* Lighter border */
-    border-radius: 6px; /* More rounded corners */
-    font-size: 1em;
-    width: 100%; 
-    box-sizing: border-box; 
-}
-
-.content {
-    font-size: 0.95em; /* Slightly larger label font size */
-    color: #555; /* Softer gray for labels */
-}
-
-label[for^="Number"], label[for^="Payment"] {
-    font-weight: bold;
-}
-
+/* Input fields and labels */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
 .request {
-    height: 100px; /* Increased height for special requests box */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* Subtle border for inputs */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 1em;
+    width: 100%; /* Full width inputs */
+    box-sizing: border-box; /* Ensures consistent sizing */
 }
 
-input[type="button"] {
-    padding: 12px 20px;
-    background-color: #0062cc; /* Updated button color */
-    color: white;
+input:focus,
+textarea:focus {
+    border-color: #0056b3; /* Highlighted border on focus */
+    outline: none; /* Removes default focus outline */
+}
+
+label {
+    font-size: 1em; /* Standard size for labels */
+    color: #333; /* Neutral color */
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Special Requests field */
+.request {
+    height: 80px; /* Enough height for text area */
+    resize: none; /* Disable resizing */
+}
+
+/* Payment Method radio buttons */
+input[type="radio"] {
+    margin-right: 10px; /* Spacing between radio buttons and labels */
+}
+
+label[for^="paymentMethod"] {
+    margin-right: 15px; /* Spacing for payment method labels */
+    font-size: 1em;
+    color: #333;
+}
+
+/* Submit button */
+button[type="submit"] {
+    padding: 10px 15px;
+    background-color: #0056b3; /* Vibrant blue button */
+    color: white; /* White text */
     border: none;
-    border-radius: 6px;
+    border-radius: 4px; /* Rounded corners */
     cursor: pointer;
     font-size: 1em;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    margin-top: 10px;
 }
 
-input[type="button"]:hover {
-    background-color: #0050a4; /* Darker hover effect */
+button[type="submit"]:hover {
+    background-color: #004494; /* Darker blue on hover */
 }
 
+/* Responsive Design for smaller screens */
 @media (max-width: 600px) {
     .first {
-        padding: 15px;
-    }
-
-    .image1 {
-        height: 200px; 
+        padding: 15px; /* Reduced padding for smaller screens */
     }
 
     .booking h1 {
-        font-size: 2em;
+        font-size: 2em; /* Slightly smaller header */
     }
 
     .booking p {
-        font-size: 1em;
+        font-size: 1em; /* Smaller description */
     }
 
     h2 {
-        font-size: 1.3em;
+        font-size: 1.3em; /* Reduced heading size */
     }
 
-    .input, .request {
-        font-size: 0.9em; 
+    input,
+    .request {
+        font-size: 0.9em; /* Adjust input font size */
     }
 
-    input[type="button"] {
-        width: 100%; 
+    button[type="submit"] {
+        width: 100%; /* Full-width button for better usability */
     }
 }
 
 @media (max-width: 400px) {
-    .input, .request {
-        padding: 8px; 
+    input,
+    .request {
+        padding: 8px; /* Smaller padding for narrow screens */
     }
 
-    h1 {
-        font-size: 1.8em;
+    .booking h1 {
+        font-size: 1.8em; /* Smaller title size */
     }
 
     h2 {
-        font-size: 1.2em;
+        font-size: 1.2em; /* Adjust heading font size */
     }
 
     .booking p {
-        font-size: 0.9em;
-    }
-
-    .image1 {
-        height: 150px; 
+        font-size: 0.9em; /* Adjust description font size */
     }
 }

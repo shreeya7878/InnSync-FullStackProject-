@@ -1,3 +1,11 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -8,44 +16,91 @@ body {
     background-image: url('../assent/reception.avif'); 
     background-size: cover;
     background-position: center; 
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
 }
 
+/* Container Styling */
 .container {
     text-align: center;
     background-color: rgba(194, 189, 189, 0.8); 
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     z-index: 1;
+    width: 100%;
+    max-width: 800px;
 }
 
+/* Header Styling */
 h1 {
     color: #333;
     margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
+/* Paragraph Styling */
 p {
     margin-bottom: 30px;
     color: #666;
+    font-size: 18px;
 }
 
+/* Button Container Styling */
 .button-container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Button Styling */
 button {
-    padding: 12px 24px;
-    font-size: 16px;
+    padding: 15px 30px;
+    font-size: 18px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     color: white;
     background-color: #4a90e2;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s ease;
+    width: 200px;
 }
 
+/* Button Hover Effect */
 button:hover {
     background-color: #357ABD;
+    transform: translateY(-2px);
+}
+
+/* Button Active Effect */
+button:active {
+    transform: translateY(1px);
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px 24px;
+        width: 100%;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 15px;
+    }
 }
